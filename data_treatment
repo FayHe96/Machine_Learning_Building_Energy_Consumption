@@ -1,0 +1,24 @@
+#this file is to pretreat data, including the steps:
+'''Step 1: For a given month, initialize all weather variables w =
+[w1, w2,. . .wP ] and schedule variables v = [v1, v2, v3,. . .vQ ] for
+all hours for both training and test data. Thus, for the month of
+January, for both training and test weather sets, the weather data
+would be a matrices of size [744 × P], corresponding to 744 hourly
+data points and P weather variables. Likewise, the schedule data
+would be matrices of size [744 × Q].
+• Step 2: Compute the Pearson coefficients of all weather variables
+(Rw) and schedule variables (Rv)for the training data. The Pearson
+coefficient is a measure of the linear correlation between a given
+variable and the output, and is used as a metric for feature ranking
+in this analysis.
+• Step 3: Sort the weather and schedule variable sets separately
+in descending order with respect to their Pearson coefficients
+obtained in the previous step, and order the weather variables
+w and schedule variables v in the same order – both for training
+and test set. Thus, the new matrices are w
+t and v
+t for the training set and w
+e and v
+e for the test set, such that wt,1 and vt,2 have
+the highest Pearson coefficients among the weather and schedule
+variables respectively in the training set.'''
