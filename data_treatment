@@ -22,3 +22,17 @@ e and v
 e for the test set, such that wt,1 and vt,2 have
 the highest Pearson coefficients among the weather and schedule
 variables respectively in the training set.'''
+
+
+#Call in data from file
+import os
+import tarfile
+from six.moves import urllib
+import pandas as pd
+from pandas import read_excel
+import io
+import requests
+
+url = 'https://github.com/FayHe96/Machine_Learning_Building_Energy_Consumption/blob/main/EnergySmallOffice_ANBMBaltimore2013.csv'
+df = pd.read_csv(url)
+
