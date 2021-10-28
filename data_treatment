@@ -24,7 +24,7 @@ the highest Pearson coefficients among the weather and schedule
 variables respectively in the training set.'''
 
 
-#Call in data from file
+'''#Call in data from file
 import os
 import tarfile
 from six.moves import urllib
@@ -34,5 +34,81 @@ import io
 import requests
 
 url = 'https://github.com/FayHe96/Machine_Learning_Building_Energy_Consumption/blob/main/EnergySmallOffice_ANBMBaltimore2013.csv'
-df = pd.read_csv(url)
+df = pd.read_csv(url)'''
+
+#You need to close the excel sheets when you are importing the data from it
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import mglearn
+from IPython.display import display
+
+
+#add the path from your computer below, replace all the "\" with '\\' and put a "#" in front of the path that you are not using
+#path_e="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
+path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
+#path_w="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weather Data\\WeatherData_HillCity2013.xlsx"
+
+
+e_ANBMBaltimore2013=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2013")
+e_ANBMBaltimore2014=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2014")
+e_HillCity2013=pd.read_excel(path_e, sheet_name = "HillCity2013")
+e_HillCity2014=pd.read_excel(path_e, sheet_name = "HillCity2014")
+e_Olympus2013=pd.read_excel(path_e, sheet_name = "Olympus2013")
+e_Olympus2014=pd.read_excel(path_e, sheet_name = "Olympus2014")
+e_QSTA2013=pd.read_excel(path_e, sheet_name = "QSTA2013")
+e_QSTA2014=pd.read_excel(path_e, sheet_name = "QSTA2014")
+
+
+sheet_order=[e_ANBMBaltimore2013,e_ANBMBaltimore2014,e_HillCity2013,e_HillCity2014, e_Olympus2013, e_Olympus2014, e_QSTA2013, e_QSTA2014]
+
+#E for energy, A/H/O/Q for cities, 3 for 2013 and 4 for 2014
+EA3={}
+EA4={}
+EH3={}
+EH4={}
+EO3={}
+EO4={}
+EQ3={}
+EQ4={}
+
+#v for scheduled variable and w for weather variable (from literature)
+v=[EA3,EA4,EH3,EH4,EO3,EO4,EQ3,EQ4]
+
+result=pd.DataFrame(cal)
+
+jan=745
+feb=1417
+mar=2161
+apr=2881
+may=3625
+jun=4345
+jul=5089
+aug=5833
+sep=6553
+octo=7297
+nov=8017
+dec=8761
+
+for i in range (len(v)):
+    
+    v[i]["time"]=sheet_order[i]["Date/Time"]
+    v[i]["Electricity"]=sheet_order[i]['Electricity:Facility [J](Hourly)']
+    v[i]["Heating"]=sheet_order[i]["Heating:Electricity [J](Hourly)"]
+    v[i]["Cooling"]=sheet_order[i]["Cooling:Electricity [J](Hourly)"]
+    v[i]["InteriorLights"]=sheet_order[i]["InteriorLights:Electricity [J](Hourly)"]
+    v[i]["ExteriorLights"]=sheet_order[i]["ExteriorLights:Electricity [J](Hourly)"]
+    v[i]["InteriorEquipment"]=sheet_order[i]["InteriorEquipment:Electricity [J](Hourly)"]
+    v[i]["Fans"]=sheet_order[i]['Fans:Electricity [J](Hourly)']
+    v[i]["Pumps"]=sheet_order[i]["Pumps:Electricity [J](Hourly)"]
+    v[i]["Gas"]=sheet_order[i]["Gas:Facility [J](Hourly)"]
+    v[i]["HeatingG"]=sheet_order[i]["Heating:Gas [J](Hourly)"]
+    v[i]["WaterSystems"]=sheet_order[i]["WaterSystems:Gas [J](Hourly) "]
+    
+    print (v[i]["Electricity"][:20])
+    print("__________________")
+    print (len(v[i]["time"]))
+    print("__________________")
+
 
