@@ -50,7 +50,6 @@ from IPython.display import display
 path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 #path_w="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weather Data\\WeatherData_HillCity2013.xlsx"
 
-path_w="Macintosh HD > Users > britanderson > Documents > 5th Year > ENCH 561 > Weatherdata.xlsx"
 
 e_ANBMBaltimore2013=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2013")
 e_ANBMBaltimore2014=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2014")
@@ -63,6 +62,7 @@ e_QSTA2014=pd.read_excel(path_e, sheet_name = "QSTA2014")
 
 
 sheet_order=[e_ANBMBaltimore2013,e_ANBMBaltimore2014,e_HillCity2013,e_HillCity2014, e_Olympus2013, e_Olympus2014, e_QSTA2013, e_QSTA2014]
+
 
 #E for energy, A/H/O/Q for cities, 3 for 2013 and 4 for 2014
 EA3={}
@@ -113,3 +113,65 @@ for i in range (len(v)):
     print("__________________")
 
 
+
+path_w="Macintosh HD > Users > britanderson > Documents > 5th Year > ENCH 561 > Weatherdata.xlsx"
+
+w_Olympus2013=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2013")
+w_Olympus2014=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2014")
+w_Baltimore2013=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2013")
+w_Baltimore2014=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2014")
+w_HillCity2013=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2013")
+w_HillCity2014=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2014")
+w_QSTA2013=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2013")
+w_QSTA2014=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2014")
+
+sheet_order2 = [w_Olympus2013, w_Olympus2014, w_Baltimore2013, w_Baltimore2014, w_HillCity2013, w_HillCity2014, w_QSTA2013, w_QSTA2014]
+
+#W for weather, B/H/O/Q for cities, 3 for 2013 and 4 for 2014
+WB3={}
+WB4={}
+WH3={}
+WH4={}
+WO3={}
+WO4={}
+WQ3={}
+WQ4={}
+
+#w for weather variable
+w=[WB3,WB4,WH3,WH4,WO3,WO4,WQ3,WQ4]
+
+result=pd.DataFrame(cal)
+
+for i in range (len(w)):
+    w[i]["Year"]= sheet_order2[i]["Year"]
+    w[i]["Month"]= sheet_order2[i]["Month"]
+    w[i]["Day"]= sheet_order2[i]["Day"]
+    w[i]["Hour"]= sheet_order2[i]["Hour"]
+    w[i]["Minute"]= sheet_order2[i]["Minute"]
+    w[i]["DB"]= sheet_order2[i]["DB"]
+    w[i]["DP"]= sheet_order2[i]["DP"]
+    w[i]["Relative humidity"]= sheet_order2[i]["Relative humidity"]
+    w[i]["Atm. pressure"]= sheet_order2[i]["Atmos. Press."]
+    w[i]["Horiz rad"]= sheet_order2[i]["Horiz Rad"]
+    w[i]["Normal rad"]= sheet_order2[i]["Normal Rad"]
+    w[i]["Sky rad"]= sheet_order2[i]["Sky Rad"]
+    w[i]["G Horiz Rad"]= sheet_order2[i]["G Horiz Rad"]
+    w[i]["DirNormal Rad"]= sheet_order2[i]["DirNormal Rad"]
+    w[i]["Diff Horiz rad"]= sheet_order2[i]["Diff Horiz Rad"]
+    w[i]["G Horiz Illum"]= sheet_order2[i]["G Horiz Illum"]
+    w[i]["Dir Norm Illum"]= sheet_order2[i]["Dir Norm Illum"]
+    w[i]["Diff Horiz Illum"]= sheet_order2[i]["Diff Horiz Illum"]
+    w[i]["Zenith Illum"]= sheet_order2[i]["Zenith Illum"]
+    w[i]["Wind Direction"]= sheet_order2[i]["Wind Direction"]
+    w[i]["Wind Speed"]= sheet_order2[i]["Wind Speed"]
+    w[i]["Total sky cov"]= sheet_order2[i]["Total Sky Cov"]
+    w[i]["Opaq sky cov"]= sheet_order2[i]["Opaq Sky Cov"]
+    w[i]["Visibility"]= sheet_order2[i]["Visibility"]
+    w[i]["field ceiling h"]= sheet_order2[i]["field ceiling h"]
+    w[i]["Weather observ"]= sheet_order2[i]["Wthr Observ"]
+    w[i]["Wthr codes"]= sheet_order2[i]["Wthr Codes"]
+    w[i]["Precipitation water"]= sheet_order2[i]["Precipit Water"]
+    w[i]["AerosOpticalD"]= sheet_order2[i]["AerosOptical D"]
+    w[i]["Snow Depth"]= sheet_order2[i]["Snow Depth"]
+    w[i]["Days since snow"]= sheet_order2[i]["Days since Snow"]
+    
