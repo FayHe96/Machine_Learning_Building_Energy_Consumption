@@ -50,6 +50,7 @@ from IPython.display import display
 path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 #path_w="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weather Data\\WeatherData_HillCity2013.xlsx"
 
+path_w="Macintosh HD > Users > britanderson > Documents > 5th Year > ENCH 561 > Weatherdata.xlsx"
 
 e_ANBMBaltimore2013=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2013")
 e_ANBMBaltimore2014=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2014")
