@@ -114,7 +114,7 @@ for i in range (len(v)):
 
 
 
-path_w="Macintosh HD/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx"
+path_w='/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx'
 
 w_Olympus2013=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2013")
 w_Olympus2014=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2014")
