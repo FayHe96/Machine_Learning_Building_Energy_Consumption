@@ -150,7 +150,7 @@ for i in range (len(w)):
     w[i]["Minute"]= sheet_order2[i]["Minute"]
     w[i]["DB"]= sheet_order2[i]["DB ( C)"]
     w[i]["DP"]= sheet_order2[i]["DP ( C)"]
-    w[i]["Relative humidity"]= sheet_order2[i]["Relative humidity (%)"]
+    w[i]["Relative humidity"]= sheet_order2[i]["RH(%)"]
     w[i]["Atm. pressure"]= sheet_order2[i]["Atmos. Press. (Pa)"]
     w[i]["Horiz rad"]= sheet_order2[i]["Horiz Rad (Wh/m2)"]
     w[i]["Normal rad"]= sheet_order2[i]["Normal Rad (Wh/m2)"]
@@ -162,12 +162,12 @@ for i in range (len(w)):
     w[i]["Dir Norm Illum"]= sheet_order2[i]["Dir Norm Illum (lux)"]
     w[i]["Diff Horiz Illum"]= sheet_order2[i]["Diff Horiz Illum (lux)"]
     w[i]["Zenith Illum"]= sheet_order2[i]["Zenith Illum (Cd/m2)"]
-    w[i]["Wind Direction"]= sheet_order2[i]["Wind Direction (degs)"]
+    w[i]["Wind Direction"]= sheet_order2[i]["Wind Direction(degs)"]
     w[i]["Wind Speed"]= sheet_order2[i]["Wind Speed (m/s)"]
     w[i]["Total sky cov"]= sheet_order2[i]["Total Sky Cov"]
     w[i]["Opaq sky cov"]= sheet_order2[i]["Opaq Sky Cov"]
     w[i]["Visibility"]= sheet_order2[i]["Visibility (km)"]
-    w[i]["field ceiling h"]= sheet_order2[i]["field ceiling h (m)"]
+    w[i]["field ceiling H"]= sheet_order2[i]["field ceiling H (m)"]
     w[i]["Weather observ"]= sheet_order2[i]["Wthr Observ"]
     w[i]["Wthr codes"]= sheet_order2[i]["Wthr Codes"]
     w[i]["Precipitation water"]= sheet_order2[i]["Precipit Water (mm)"]
@@ -175,7 +175,5 @@ for i in range (len(w)):
     w[i]["Snow Depth"]= sheet_order2[i]["Snow Depth (cm)"]
     w[i]["Days since snow"]= sheet_order2[i]["Days since Snow"]
     
-    print (v[i]["Relative humidity"][:20])
-    print("__________________")
-    print (len(v[i]["Year"]))
+    print (w[i]["Relative humidity"][:5])
     print("__________________")
