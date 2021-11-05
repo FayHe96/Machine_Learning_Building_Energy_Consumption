@@ -1,40 +1,4 @@
-#this file is to pretreat data, including the steps:
-'''Step 1: For a given month, initialize all weather variables w =
-[w1, w2,. . .wP ] and schedule variables v = [v1, v2, v3,. . .vQ ] for
-all hours for both training and test data. Thus, for the month of
-January, for both training and test weather sets, the weather data
-would be a matrices of size [744 × P], corresponding to 744 hourly
-data points and P weather variables. Likewise, the schedule data
-would be matrices of size [744 × Q].
-• Step 2: Compute the Pearson coefficients of all weather variables
-(Rw) and schedule variables (Rv)for the training data. The Pearson
-coefficient is a measure of the linear correlation between a given
-variable and the output, and is used as a metric for feature ranking
-in this analysis.
-• Step 3: Sort the weather and schedule variable sets separately
-in descending order with respect to their Pearson coefficients
-obtained in the previous step, and order the weather variables
-w and schedule variables v in the same order – both for training
-and test set. Thus, the new matrices are w
-t and v
-t for the training set and w
-e and v
-e for the test set, such that wt,1 and vt,2 have
-the highest Pearson coefficients among the weather and schedule
-variables respectively in the training set.'''
-
-
-'''#Call in data from file
-import os
-import tarfile
-from six.moves import urllib
-import pandas as pd
-from pandas import read_excel
-import io
-import requests
-
-url = 'https://github.com/FayHe96/Machine_Learning_Building_Energy_Consumption/blob/main/EnergySmallOffice_ANBMBaltimore2013.csv'
-df = pd.read_csv(url)'''
+'''PART1 IMPORTING DATA'''
 
 #You need to close the excel sheets when you are importing the data from it
 
@@ -44,15 +8,18 @@ import pandas as pd
 import mglearn
 from IPython.display import display
 
-
+'''Schedule data'''
 #add the path from your computer below, replace all the "\" with '\\' and put a "#" in front of the path that you are not using
 #path_e="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
-#path_w="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weather Data\\WeatherData_HillCity2013.xlsx"
 
+'''weather data'''
+path_w="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weatherdata.xlsx"
+#path_w = '/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx'
+#path_w = pd.read_excel('/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx')
 
-e_ANBMBaltimore2013=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2013")
-e_ANBMBaltimore2014=pd.read_excel(path_e, sheet_name = "ANBMBaltimore2014")
+e_Baltimore2013=pd.read_excel(path_e, sheet_name = "Baltimore2013")
+e_Baltimore2014=pd.read_excel(path_e, sheet_name = "Baltimore2014")
 e_HillCity2013=pd.read_excel(path_e, sheet_name = "HillCity2013")
 e_HillCity2014=pd.read_excel(path_e, sheet_name = "HillCity2014")
 e_Olympus2013=pd.read_excel(path_e, sheet_name = "Olympus2013")
@@ -60,9 +27,18 @@ e_Olympus2014=pd.read_excel(path_e, sheet_name = "Olympus2014")
 e_QSTA2013=pd.read_excel(path_e, sheet_name = "QSTA2013")
 e_QSTA2014=pd.read_excel(path_e, sheet_name = "QSTA2014")
 
+w_Olympus2013=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2013")
+w_Olympus2014=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2014")
+w_Baltimore2013=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2013")
+w_Baltimore2014=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2014")
+w_HillCity2013=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2013")
+w_HillCity2014=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2014")
+w_QSTA2013=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2013")
+w_QSTA2014=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2014")
 
-sheet_order=[e_ANBMBaltimore2013,e_ANBMBaltimore2014,e_HillCity2013,e_HillCity2014, e_Olympus2013, e_Olympus2014, e_QSTA2013, e_QSTA2014]
 
+sheet_order=[e_Baltimore2013, e_Baltimore2014, e_HillCity2013, e_HillCity2014, e_Olympus2013, e_Olympus2014, e_QSTA2013, e_QSTA2014]
+sheet_order2 = [w_Baltimore2013, w_Baltimore2014, w_HillCity2013, w_HillCity2014, w_Olympus2013, w_Olympus2014, w_QSTA2013, w_QSTA2014]
 
 #E for energy, A/H/O/Q for cities, 3 for 2013 and 4 for 2014
 EA3={}
@@ -73,11 +49,21 @@ EO3={}
 EO4={}
 EQ3={}
 EQ4={}
+#W for weather, B/H/O/Q for cities, 3 for 2013 and 4 for 2014
+WB3={}
+WB4={}
+WH3={}
+WH4={}
+WO3={}
+WO4={}
+WQ3={}
+WQ4={}
 
 #v for scheduled variable and w for weather variable (from literature)
 v=[EA3,EA4,EH3,EH4,EO3,EO4,EQ3,EQ4]
+w=[WB3,WB4,WH3,WH4,WO3,WO4,WQ3,WQ4]
 
-result=pd.DataFrame(cal)
+#result=pd.DataFrame(cal)
 
 jan=745
 feb=1417
@@ -112,36 +98,6 @@ for i in range (len(v)):
     print (len(v[i]["time"]))
     print("__________________")
 
-
-
-path_w='/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx'
-
-w_Olympus2013=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2013")
-w_Olympus2014=pd.read_excel(path_w, sheet_name = "OlympusWeatherData_2014")
-w_Baltimore2013=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2013")
-w_Baltimore2014=pd.read_excel(path_w, sheet_name = "WeatherData_Baltimore2014")
-w_HillCity2013=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2013")
-w_HillCity2014=pd.read_excel(path_w, sheet_name = "WeatherData_HillCity2014")
-w_QSTA2013=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2013")
-w_QSTA2014=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2014")
-
-sheet_order2 = [w_Olympus2013, w_Olympus2014, w_Baltimore2013, w_Baltimore2014, w_HillCity2013, w_HillCity2014, w_QSTA2013, w_QSTA2014]
-
-#W for weather, B/H/O/Q for cities, 3 for 2013 and 4 for 2014
-WB3={}
-WB4={}
-WH3={}
-WH4={}
-WO3={}
-WO4={}
-WQ3={}
-WQ4={}
-
-#w for weather variable
-w=[WB3,WB4,WH3,WH4,WO3,WO4,WQ3,WQ4]
-
-result=pd.DataFrame(cal)
-
 for i in range (len(w)):
     w[i]["Year"]= sheet_order2[i]["Year"]
     w[i]["Month"]= sheet_order2[i]["Month"]
@@ -167,7 +123,7 @@ for i in range (len(w)):
     w[i]["Total sky cov"]= sheet_order2[i]["Total Sky Cov"]
     w[i]["Opaq sky cov"]= sheet_order2[i]["Opaq Sky Cov"]
     w[i]["Visibility"]= sheet_order2[i]["Visibility (km)"]
-    w[i]["field ceiling H"]= sheet_order2[i]["field ceiling H (m)"]
+    w[i]["field ceiling H"]= sheet_order2[i]["field Ceiling H (m)"]
     w[i]["Weather observ"]= sheet_order2[i]["Wthr Observ"]
     w[i]["Wthr codes"]= sheet_order2[i]["Wthr Codes"]
     w[i]["Precipitation water"]= sheet_order2[i]["Precipit Water (mm)"]
@@ -175,5 +131,19 @@ for i in range (len(w)):
     w[i]["Snow Depth"]= sheet_order2[i]["Snow Depth (cm)"]
     w[i]["Days since snow"]= sheet_order2[i]["Days since Snow"]
     
-    print (w[i]["Relative humidity"][:5])
-    print("__________________")
+    print (w[i]["Atm. pressure"][:5])
+    print("__________")
+    
+'''PART 2 PEARSON COEFFICIENT'''
+print ("Pearson coefficient for schedule data")
+for i in range (len(v)):
+    print(i)
+    display(sheet_order[i].dropna().corr())
+    #.format("time","Date/Time","Electricity",'Electricity:Facility [J](Hourly)',"Heating","Cooling","Cooling:Electricity [J](Hourly)","InteriorLights","InteriorLights:Electricity [J](Hourly)","ExteriorLights","ExteriorLights:Electricity [J](Hourly)","InteriorEquipment","InteriorEquipment:Electricity [J](Hourly)","Fans",'Fans:Electricity [J](Hourly)',"Pumps","Pumps:Electricity [J](Hourly)","Gas","Gas:Facility [J](Hourly)","HeatingG","Heating:Gas [J](Hourly)","WaterSystems")
+    print("___________")
+    
+print ("Pearson coefficient for weather data")
+for i in range (len(w)):
+    print(i)
+    display(sheet_order2[i].dropna().corr())
+    print("___________")
