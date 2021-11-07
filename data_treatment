@@ -147,3 +147,42 @@ for i in range (len(w)):
     print(i)
     display(sheet_order2[i].dropna().corr())
     print("___________")
+    
+#Drop NaN columns and rank correlations from highest to lowest
+#remove "Heating" from list v
+for i in range (len(v)):
+    print(i)
+    sheet_order[i].pop('Heating:Electricity [J](Hourly)')
+    display(sheet_order[i].corr())
+    
+#remove "Minute", "Weather Observer", "Weather Codes", "Snow Depth", "Days since snow" from w
+for i in range (len(w)):
+    print(i)
+    sheet_order2[i].pop('Minute')
+    sheet_order2[i].pop('Wthr Observ')
+    sheet_order2[i].pop('Wthr Codes')
+    sheet_order2[i].pop('Snow Depth (cm)')
+    sheet_order2[i].pop('Days since Snow')
+    display(sheet_order2[i].corr())
+    print("___________")
+    
+#corr_list needs 10 lists
+#Correlation matrix for sheet_order [v]
+corr_list = [0,0,0,0,0,0,0,0,0,0]
+
+#Correlation matrix for sheet_order2 [w]
+corr_list2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+for i in range (len(v)):
+    print(i)
+    corr_list[i] = sheet_order[i].corr()
+
+for i in range (len(w)):
+    print(i)
+    corr_list2[i] = sheet_order2[i].corr()
+
+#Show list of correlations for [v]
+corr_list[1]["Gas:Facility [J](Hourly)"].sort_values(ascending=False)
+
+#Show list of correlation for [w]
+corr_list2[1]["RH(%)"].sort_values(ascending=False)
