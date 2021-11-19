@@ -8,13 +8,14 @@ import pandas as pd
 import mglearn
 from IPython.display import display
 
-'''Schedule data'''
+'''Energy data'''
 #add the path from your computer below, replace all the "\" with '\\' and put a "#" in front of the path that you are not using
 #path_e="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 
 '''weather data'''
 path_w="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weatherdata.xlsx"
+#path_w="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weatherdata.xlsx"
 #path_w = '/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx'
 #path_w = pd.read_excel('/Users/britanderson/Documents/5th Year/ENCH 561/Weatherdata.xlsx')
 
@@ -40,152 +41,7 @@ w_QSTA2014=pd.read_excel(path_w, sheet_name = "WeatherData_QSTA2014")
 sheet_order=[e_Baltimore2013, e_Baltimore2014, e_HillCity2013, e_HillCity2014, e_Olympus2013, e_Olympus2014, e_QSTA2013, e_QSTA2014]
 sheet_order2 = [w_Baltimore2013, w_Baltimore2014, w_HillCity2013, w_HillCity2014, w_Olympus2013, w_Olympus2014, w_QSTA2013, w_QSTA2014]
 
-#E for energy, A/H/O/Q for cities, 3 for 2013 and 4 for 2014
-EA3={}
-EA4={}
-EH3={}
-EH4={}
-EO3={}
-EO4={}
-EQ3={}
-EQ4={}
-#W for weather, B/H/O/Q for cities, 3 for 2013 and 4 for 2014
-WB3={}
-WB4={}
-WH3={}
-WH4={}
-WO3={}
-WO4={}
-WQ3={}
-WQ4={}
 
-#v for scheduled variable and w for weather variable (from literature)
-v=[EA3,EA4,EH3,EH4,EO3,EO4,EQ3,EQ4]
-w=[WB3,WB4,WH3,WH4,WO3,WO4,WQ3,WQ4]
-
-#result=pd.DataFrame(cal)
-
-jan=745
-feb=1417
-mar=2161
-apr=2881
-may=3625
-jun=4345
-jul=5089
-aug=5833
-sep=6553
-octo=7297
-nov=8017
-dec=8761
-
-for i in range (len(v)):
-    
-    v[i]["time"]=sheet_order[i]["Date/Time"]
-    v[i]["Electricity"]=sheet_order[i]['Electricity:Facility [J](Hourly)']
-    v[i]["Heating"]=sheet_order[i]["Heating:Electricity [J](Hourly)"]
-    v[i]["Cooling"]=sheet_order[i]["Cooling:Electricity [J](Hourly)"]
-    v[i]["InteriorLights"]=sheet_order[i]["InteriorLights:Electricity [J](Hourly)"]
-    v[i]["ExteriorLights"]=sheet_order[i]["ExteriorLights:Electricity [J](Hourly)"]
-    v[i]["InteriorEquipment"]=sheet_order[i]["InteriorEquipment:Electricity [J](Hourly)"]
-    v[i]["Fans"]=sheet_order[i]['Fans:Electricity [J](Hourly)']
-    v[i]["Pumps"]=sheet_order[i]["Pumps:Electricity [J](Hourly)"]
-    v[i]["Gas"]=sheet_order[i]["Gas:Facility [J](Hourly)"]
-    v[i]["HeatingG"]=sheet_order[i]["Heating:Gas [J](Hourly)"]
-    v[i]["WaterSystems"]=sheet_order[i]["WaterSystems:Gas [J](Hourly) "]
-    
-    print (v[i]["Electricity"][:20])
-    print("__________________")
-    print (len(v[i]["time"]))
-    print("__________________")
-
-for i in range (len(w)):
-    w[i]["Year"]= sheet_order2[i]["Year"]
-    w[i]["Month"]= sheet_order2[i]["Month"]
-    w[i]["Day"]= sheet_order2[i]["Day"]
-    w[i]["Hour"]= sheet_order2[i]["Hour"]
-    w[i]["Minute"]= sheet_order2[i]["Minute"]
-    w[i]["DB"]= sheet_order2[i]["DB ( C)"]
-    w[i]["DP"]= sheet_order2[i]["DP ( C)"]
-    w[i]["Relative humidity"]= sheet_order2[i]["RH(%)"]
-    w[i]["Atm. pressure"]= sheet_order2[i]["Atmos. Press. (Pa)"]
-    w[i]["Horiz rad"]= sheet_order2[i]["Horiz Rad (Wh/m2)"]
-    w[i]["Normal rad"]= sheet_order2[i]["Normal Rad (Wh/m2)"]
-    w[i]["Sky rad"]= sheet_order2[i]["Sky Rad (Wh/m2)"]
-    w[i]["G Horiz Rad"]= sheet_order2[i]["G Horiz Rad (Wh/m2)"]
-    w[i]["DirNormal Rad"]= sheet_order2[i]["DirNormal Rad (Wh/m2)"]
-    w[i]["Diff Horiz rad"]= sheet_order2[i]["Diff Horiz Rad (Wh/m2)"]
-    w[i]["G Horiz Illum"]= sheet_order2[i]["G Horiz Illum (lux)"]
-    w[i]["Dir Norm Illum"]= sheet_order2[i]["Dir Norm Illum (lux)"]
-    w[i]["Diff Horiz Illum"]= sheet_order2[i]["Diff Horiz Illum (lux)"]
-    w[i]["Zenith Illum"]= sheet_order2[i]["Zenith Illum (Cd/m2)"]
-    w[i]["Wind Direction"]= sheet_order2[i]["Wind Direction(degs)"]
-    w[i]["Wind Speed"]= sheet_order2[i]["Wind Speed (m/s)"]
-    w[i]["Total sky cov"]= sheet_order2[i]["Total Sky Cov"]
-    w[i]["Opaq sky cov"]= sheet_order2[i]["Opaq Sky Cov"]
-    w[i]["Visibility"]= sheet_order2[i]["Visibility (km)"]
-    w[i]["field ceiling H"]= sheet_order2[i]["field Ceiling H (m)"]
-    w[i]["Weather observ"]= sheet_order2[i]["Wthr Observ"]
-    w[i]["Wthr codes"]= sheet_order2[i]["Wthr Codes"]
-    w[i]["Precipitation water"]= sheet_order2[i]["Precipit Water (mm)"]
-    w[i]["AerosOpticalD"]= sheet_order2[i]["AerosOptical D (1/1000)"]
-    w[i]["Snow Depth"]= sheet_order2[i]["Snow Depth (cm)"]
-    w[i]["Days since snow"]= sheet_order2[i]["Days since Snow"]
-    
-    print (w[i]["Atm. pressure"][:5])
-    print("__________")
-    
-'''PART 2 PEARSON COEFFICIENT'''
-print ("Pearson coefficient for schedule data")
-for i in range (len(v)):
-    print(i)
-    display(sheet_order[i].dropna().corr())
-    #.format("time","Date/Time","Electricity",'Electricity:Facility [J](Hourly)',"Heating","Cooling","Cooling:Electricity [J](Hourly)","InteriorLights","InteriorLights:Electricity [J](Hourly)","ExteriorLights","ExteriorLights:Electricity [J](Hourly)","InteriorEquipment","InteriorEquipment:Electricity [J](Hourly)","Fans",'Fans:Electricity [J](Hourly)',"Pumps","Pumps:Electricity [J](Hourly)","Gas","Gas:Facility [J](Hourly)","HeatingG","Heating:Gas [J](Hourly)","WaterSystems")
-    print("___________")
-    
-print ("Pearson coefficient for weather data")
-for i in range (len(w)):
-    print(i)
-    display(sheet_order2[i].dropna().corr())
-    print("___________")
-    
-#Drop NaN columns and rank correlations from highest to lowest
-#remove "Heating" from list v
-for i in range (len(v)):
-    print(i)
-    sheet_order[i].pop('Heating:Electricity [J](Hourly)')
-    display(sheet_order[i].corr())
-    
-#remove "Minute", "Weather Observer", "Weather Codes", "Snow Depth", "Days since snow" from w
-for i in range (len(w)):
-    print(i)
-    sheet_order2[i].pop('Minute')
-    sheet_order2[i].pop('Wthr Observ')
-    sheet_order2[i].pop('Wthr Codes')
-    sheet_order2[i].pop('Snow Depth (cm)')
-    sheet_order2[i].pop('Days since Snow')
-    display(sheet_order2[i].corr())
-    print("___________")
-    
-#corr_list needs 10 lists
-#Correlation matrix for sheet_order [v]
-corr_list = [0,0,0,0,0,0,0,0,0,0]
-
-#Correlation matrix for sheet_order2 [w]
-corr_list2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-for i in range (len(v)):
-    print(i)
-    corr_list[i] = sheet_order[i].corr()
-
-for i in range (len(w)):
-    print(i)
-    corr_list2[i] = sheet_order2[i].corr()
-
-#Show list of correlations for [v]
-corr_list[1]["Gas:Facility [J](Hourly)"].sort_values(ascending=False)
-
-#Show list of correlation for [w]
-corr_list2[1]["RH(%)"].sort_values(ascending=False)
 
 #import schedule variables
 Lighting = list(range(0,8761))
@@ -347,7 +203,7 @@ for i in range (2881, 7296):
             Occupancy[i] = 0.3
         elif count >=12 and count < 17:
             Occupancy[i] = 0.1
-        elif count >=17 and count count < 19:
+        elif count >=17 and count < 19:
             Occupancy[i] = 0.05
         elif count >=19 and count <= 24:
             Occupancy[i] = 0.00
@@ -376,7 +232,7 @@ for i in range (0, 2880):
         Occupancy[i] = 0.3
     elif count >=12 and count < 17:
         Occupancy[i] = 0.1
-    elif count >=17 and count count < 19:
+    elif count >=17 and count < 19:
         Occupancy[i] = 0.05
     elif count >=19 and count <= 24:
         Occupancy[i] = 0.00
@@ -409,7 +265,7 @@ for i in range (7297, 8760):
         Occupancy[i] = 0.3
     elif count >=12 and count < 17:
         Occupancy[i] = 0.1
-    elif count >=17 and count count < 19:
+    elif count >=17 and count < 19:
         Occupancy[i] = 0.05
     elif count >=19 and count <= 24:
         Occupancy[i] = 0.00
@@ -692,3 +548,86 @@ for i in range (7297, 8760):
             ServiceWaterHeating[i] = 0.04
 
     daycount = daycount + 1
+
+
+#E for energy, A/H/O/Q for cities, 3 for 2013 and 4 for 2014
+EA3=[]
+EA4=[]
+EH3=[]
+EH4=[]
+EO3=[]
+EO4=[]
+EQ3=[]
+EQ4=[]
+#W for weather and schedule, B/H/O/Q for cities, 3 for 2013 and 4 for 2014
+WB3=[]
+WB4=[]
+WH3=[]
+WH4=[]
+WO3=[]
+WO4=[]
+WQ3=[]
+WQ4=[]
+
+#e for scheduled variable and w for weather and schedule variable (from literature)
+e=[EA3,EA4,EH3,EH4,EO3,EO4,EQ3,EQ4]
+w=[WB3,WB4,WH3,WH4,WO3,WO4,WQ3,WQ4]
+
+#result=pd.DataFrame(cal)
+
+jan=745
+feb=1417
+mar=2161
+apr=2881
+may=3625
+jun=4345
+jul=5089
+aug=5833
+sep=6553
+octo=7297
+nov=8017
+dec=8761
+
+for i in range (len(e)):
+
+    e[i].append(sheet_order[i]['Electricity:Facility [J](Hourly)'])
+    e[i].append(sheet_order[i]["Gas:Facility [J](Hourly)"])
+    ae[i]=np.array(e[i])
+    print(ae[i].shape)
+    print(type(ae[i]))
+    ae[i]=np.transpose(np.array(e[i]))
+#    aet[i]=np.transpose(ae[i])
+    print(ae[i].shape)
+    print(type(ae[i]))
+
+for i in range (len(e)):
+    
+    w[i].append(sheet_order2[i]["DB ( C)"])
+    w[i].append(sheet_order2[i]["RH(%)"])
+    w[i].append(sheet_order2[i]["DirNormal Rad (Wh/m2)"])
+    w[i].append(sheet_order2[i]["Wind Speed (m/s)"])
+    w[i].append(sheet_order2[i]["Precipit Water (mm)"])
+    w[i].append(Lighting[:8760])
+    w[i].append(Occupancy[:8760])
+    w[i].append(ServiceWaterHeating[:8760])
+    aw[i]=np.array(w[i])
+#    awt[i]=np.transpose(aw[i])
+#display(aw)
+    print(aw[i].shape)
+    print(type(aw[i]))
+from sklearn.neural_network import MLPRegressor
+from sklearn.model_selection import train_test_split
+
+for i in range (len(e)):
+    X_train, X_test, y_train, y_test = train_test_split(w[i], e[i], random_state=1)
+    print(X_train[:10])
+    print(X_test[:10])
+
+    mlp = MLPRegressor(random_state=0).fit(X_train, y_train)
+
+    mglearn.plots.plot_2d_separator(mlp, X_train, fill=True, alpha=.3)
+    mglearn.discrete_scatter(X_train[:, 0], X_train[:, 1], y_train)
+
+
+    
+
