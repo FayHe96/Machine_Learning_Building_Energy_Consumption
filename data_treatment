@@ -592,13 +592,14 @@ for i in range (len(e)):
 
     e[i].append(sheet_order[i]['Electricity:Facility [J](Hourly)'])
     e[i].append(sheet_order[i]["Gas:Facility [J](Hourly)"])
-    ae[i]=np.array(e[i])
-    print(ae[i].shape)
-    print(type(ae[i]))
-    ae[i]=np.transpose(np.array(e[i]))
+    ae=np.array(e[i])
+    print(ae.shape)
+    print(type(ae))
+    ae=np.transpose(ae)
 #    aet[i]=np.transpose(ae[i])
-    print(ae[i].shape)
-    print(type(ae[i]))
+    print(ae.shape)
+    print(type(ae))
+
 
 for i in range (len(e)):
     
@@ -610,13 +611,15 @@ for i in range (len(e)):
     w[i].append(Lighting[:8760])
     w[i].append(Occupancy[:8760])
     w[i].append(ServiceWaterHeating[:8760])
-    aw[i]=np.array(w[i])
+        aw=np.array(w[i])
 #    awt[i]=np.transpose(aw[i])
 #display(aw)
-    print(aw[i].shape)
-    print(type(aw[i]))
-from sklearn.neural_network import MLPRegressor
-from sklearn.model_selection import train_test_split
+    print(aw.shape)
+    print(type(aw))
+    aw=np.transpose(aw)
+    print(aw.shape)
+    print(type(aw))
+
 
 for i in range (len(e)):
     X_train, X_test, y_train, y_test = train_test_split(w[i], e[i], random_state=1)
