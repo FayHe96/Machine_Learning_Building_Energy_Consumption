@@ -12,6 +12,7 @@ from IPython.display import display
 #add the path from your computer below, replace all the "\" with '\\' and put a "#" in front of the path that you are not using
 #path_e="C:\\Users\\fayhe\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
 path_e="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\EnergySmallOffice.xlsx"
+#path_e = '/Users/britanderson/Documents/5th Year/ENCH 561/EnergySmallOffice.xlsx'
 
 '''weather data'''
 path_w="C:\\Users\\EERG\\OneDrive - University of Calgary\\MachineLearningProject\\Final Paper\\Weatherdata.xlsx"
